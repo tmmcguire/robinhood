@@ -29,11 +29,15 @@ class iso _TestUpdate is UnitTest
     h.assert_is[(None | USize val)](None, m(1) = 1)
     h.assert_eq[USize](1, m.size())
     h.assert_eq[USize](6, m.space())
+    var s: USize = 1
     for i in Range(0, 40) do
       m(i+10) = i+10
+      s = s + 1
+      h.assert_eq[USize](s, m.size())
+      h.assert_eq[USize](s, m.count())
     end
     h.assert_eq[USize](41, m.size(), "m.size()")
-    h.assert_eq[USize](96, m.space(), "m.space()")
+    h.assert_eq[USize](48, m.space(), "m.space()")
     h.assert_eq[USize](1, m(1), "m(1)")
     h.assert_eq[USize](49, m(49), "m(49)")
 
