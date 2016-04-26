@@ -25,7 +25,7 @@ class iso _TestCreate is UnitTest
 class iso _TestUpdate is UnitTest
   fun name(): String => "update"
   fun apply(h: TestHelper) ? =>
-    let m = RHMap[USize,USize,HashEq[USize]]
+    let m = RHMap[USize,USize,HashEq[USize]](where load_factor_numerator = 3, load_factor_denominator = 4)
     h.assert_is[(None | USize val)](None, m(1) = 1)
     h.assert_eq[USize](1, m.size())
     h.assert_eq[USize](6, m.space())
@@ -34,10 +34,9 @@ class iso _TestUpdate is UnitTest
       m(i+10) = i+10
       s = s + 1
       h.assert_eq[USize](s, m.size())
-      h.assert_eq[USize](s, m.count())
     end
     h.assert_eq[USize](41, m.size(), "m.size()")
-    h.assert_eq[USize](48, m.space(), "m.space()")
+    h.assert_eq[USize](49, m.space(), "m.space()")
     h.assert_eq[USize](1, m(1), "m(1)")
     h.assert_eq[USize](49, m(49), "m(49)")
 
@@ -52,12 +51,12 @@ class iso _TestApply is UnitTest
     h.assert_is[(None | USize)](None, try m(0) end)
 
 class iso _TestHasKey is UnitTest
-  fun name(): String => "has_key"
+  fun name(): String => "contains"
   fun apply(h: TestHelper) =>
     let m = RHMap[USize,USize,HashEq[USize]]
     h.assert_is[(None | USize val)](None, m(1) = 1)
-    h.assert_true(m.has_key(1))
-    h.assert_false(m.has_key(2))
+    h.assert_true(m.contains(1))
+    h.assert_false(m.contains(2))
 
 class iso _TestRemove is UnitTest
   fun name(): String => "remove"
