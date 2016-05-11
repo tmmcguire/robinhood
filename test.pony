@@ -36,7 +36,7 @@ class iso _TestUpdate is UnitTest
       h.assert_eq[USize](s, m.size())
     end
     h.assert_eq[USize](41, m.size(), "m.size()")
-    h.assert_eq[USize](49, m.space(), "m.space()")
+    h.assert_eq[USize](48, m.space(), "m.space()")
     h.assert_eq[USize](1, m(1), "m(1)")
     h.assert_eq[USize](49, m(49), "m(49)")
 
